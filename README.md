@@ -49,7 +49,6 @@ flowchart TD
 | `theme_fact_full_v3.csv` | 主题聚合表（按 need_theme_l1 + need_theme_l2 聚合） |
 | `jtbd_fact_full_v3.csv` | JTBD 聚合表（按 jtbd_l1 + scenario_l2 聚合） |
 | `need_theme_other_issues_full_v3.csv` | 未分类明细（165 条待消化） |
-| `voc_dashboard_v3.html` | 最新 Dashboard |
 
 ## 全量运行
 
