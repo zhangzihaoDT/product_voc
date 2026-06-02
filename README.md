@@ -21,8 +21,13 @@ flowchart TD
   I --> K
   J --> K
 
+  H --> L[VOC Analysis / CLI]
+  I --> L
+  J --> L
+  M[journey_definition.json] --> L
+
   classDef highlight fill:#FFE08A,stroke:#E8590C,stroke-width:2px,color:#000;
-  class K highlight;
+  class K,L highlight;
 ```
 
 ## 文件清单
@@ -34,6 +39,9 @@ flowchart TD
 | `llm_refiner_agent.py` | LLM 精标：补全 is_voc / domain / need_theme_l2 等 |
 | `theme_priority_engine.py` | 聚合 issue → theme_fact / jtbd_fact / other 明细 |
 | `voc_dashboard.py` | 生成交互式 HTML Dashboard（读 theme_fact + jtbd_fact） |
+| `voc_analysis.py` | 报告生成脚本：阶段展开 / TOP 10 优先级 / 未分类明细 |
+| `journey_definition.json` | JTBD 分类框架定义（jtbd_scenarios + need_theme_dict） |
+| `classification_framework.md` | 分类框架文档 |
 | `need_theme_dict.csv` | 产品语言词典（63 个主题 + 关键词） |
 | `issue_fact_raw.csv` | Parser 输出（2722 issues） |
 | `feedback_fact.csv` | Parser 中间产物 |
@@ -71,6 +79,14 @@ python voc_dashboard.py \
   --jtbd-csv jtbd_fact_full.csv \
   --other-issues-csv need_theme_other_issues_full.csv \
   --output voc_dashboard.html
+
+# 5) Analysis Report
+python voc_analysis.py \
+  --theme theme_fact_full.csv \
+  --jtbd jtbd_fact_full.csv \
+  --source issue_fact_refined_full.csv \
+  --other need_theme_other_issues_full.csv \
+  --output voc_analysis_report.html
 ```
 
 ## 只重跑 Other 子集
@@ -101,6 +117,7 @@ m.to_csv('issue_fact_refined_full_v4.csv', index=False, encoding='utf-8-sig')
 - **全量 issues**: 2722 条
 - **other 率**: **6.1%**（目标 <5%）
 - **主题数**: 83 个（L1: 智驾/智舱/服务/交付/车辆品质/补能 等）
+- **JTBD 数**: 12 个（场景维度）
 - **按优先级排序**: theme_fact_full_v3.csv 按 priority_score 降序
 
 ## 产品语言词典维护
