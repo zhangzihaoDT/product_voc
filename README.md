@@ -14,10 +14,12 @@ flowchart TD
 
   F --> G[Theme Priority Engine]
   G --> H[theme_fact_full_v3.csv]
-  G --> I[need_theme_other_issues_full_v3.csv]
+  G --> I[jtbd_fact_full_v3.csv]
+  G --> J[need_theme_other_issues_full_v3.csv]
 
-  H --> J[VOC Dashboard / HTML]
-  J --> K[交互式报表]
+  H --> K[VOC Dashboard / HTML]
+  I --> K
+  J --> K
 
   classDef highlight fill:#FFE08A,stroke:#E8590C,stroke-width:2px,color:#000;
   class K highlight;
@@ -30,13 +32,14 @@ flowchart TD
 | `1～4 月用户反馈/` | 原始 Excel（4 个） |
 | `parser_agent.py` | 解析 Excel → feedback_fact + issue_fact_raw |
 | `llm_refiner_agent.py` | LLM 精标：补全 is_voc / domain / need_theme_l2 等 |
-| `theme_priority_engine.py` | 聚合 issue → theme_fact + other 明细 |
-| `voc_dashboard.py` | 生成交互式 HTML Dashboard |
+| `theme_priority_engine.py` | 聚合 issue → theme_fact / jtbd_fact / other 明细 |
+| `voc_dashboard.py` | 生成交互式 HTML Dashboard（读 theme_fact + jtbd_fact） |
 | `need_theme_dict.csv` | 产品语言词典（63 个主题 + 关键词） |
 | `issue_fact_raw.csv` | Parser 输出（2722 issues） |
 | `feedback_fact.csv` | Parser 中间产物 |
 | `issue_fact_refined_full_v3.csv` | Refiner 精标完成（other ≈ **6.1%**） |
-| `theme_fact_full_v3.csv` | 主题聚合表（86 个主题） |
+| `theme_fact_full_v3.csv` | 主题聚合表（按 need_theme_l1 + need_theme_l2 聚合） |
+| `jtbd_fact_full_v3.csv` | JTBD 聚合表（按 jtbd_l1 + scenario_l2 聚合） |
 | `need_theme_other_issues_full_v3.csv` | 未分类明细（165 条待消化） |
 | `voc_dashboard_v3.html` | 最新 Dashboard |
 
@@ -59,11 +62,13 @@ python llm_refiner_agent.py --input issue_fact_raw.csv \
 # 3) Theme Priority
 python theme_priority_engine.py --input issue_fact_refined_full.csv \
   --output-theme theme_fact_full.csv \
+  --output-jtbd jtbd_fact_full.csv \
   --output-other need_theme_other_issues_full.csv
 
 # 4) Dashboard
 python voc_dashboard.py \
   --theme-csv theme_fact_full.csv \
+  --jtbd-csv jtbd_fact_full.csv \
   --other-issues-csv need_theme_other_issues_full.csv \
   --output voc_dashboard.html
 ```

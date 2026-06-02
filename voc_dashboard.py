@@ -10,20 +10,32 @@ except Exception:
     go = None
 
 DEFAULT_THEME_CSV = "theme_fact_full.csv"
+DEFAULT_JTBD_CSV = "jtbd_fact_full.csv"
 DEFAULT_OTHER_CSV = "need_theme_other_issues_full.csv"
 DEFAULT_OUTPUT_HTML = "voc_dashboard.html"
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--theme-csv", default=DEFAULT_THEME_CSV)
+parser.add_argument("--jtbd-csv", default=DEFAULT_JTBD_CSV)
 parser.add_argument("--other-issues-csv", default=DEFAULT_OTHER_CSV)
 parser.add_argument("--output", default=DEFAULT_OUTPUT_HTML)
 args = parser.parse_args()
 
 theme_csv_path = Path(args.theme_csv)
+jtbd_csv_path = Path(args.jtbd_csv) if args.jtbd_csv else None
 other_csv_path = Path(args.other_issues_csv) if args.other_issues_csv else None
 output_path = Path(args.output)
 
 df = pd.read_csv(theme_csv_path, encoding="utf-8-sig")
+
+df_jtbd = None
+if jtbd_csv_path is not None and jtbd_csv_path.exists():
+    df_jtbd = pd.read_csv(jtbd_csv_path, encoding="utf-8-sig")
+    df_jtbd.columns = df_jtbd.columns.str.strip()
+    for col in ["issue_count", "app_count", "phone400_count"]:
+        df_jtbd[col] = pd.to_numeric(df_jtbd[col], errors="coerce").fillna(0).astype(int)
+    for col in ["avg_severity", "avg_sentiment", "priority_score"]:
+        df_jtbd[col] = pd.to_numeric(df_jtbd[col], errors="coerce").fillna(0)
 
 df.columns = df.columns.str.strip()
 for col in ["issue_count", "app_count", "phone400_count"]:
@@ -48,6 +60,15 @@ if px is None or go is None:
     top20["priority_score"] = top20["priority_score"].round(2)
 
     l1_sum = df.groupby("need_theme_l1", as_index=False)["issue_count"].sum().sort_values("issue_count", ascending=False)
+    jtbd_html = ""
+    if df_jtbd is not None:
+        jtbd_dist = df_jtbd.groupby("jtbd_l1", as_index=False)["issue_count"].sum().sort_values("issue_count", ascending=False)
+        jtbd_html = f"""
+<h2>JTBD 分布</h2>
+{jtbd_dist.to_html(index=False)}
+<h2>Top 20 JTBD / 场景</h2>
+{df_jtbd.head(20).to_html(index=False)}"""
+
     html = f"""<html lang="zh-CN">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>VOC Dashboard</title></head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 24px;">
@@ -64,6 +85,7 @@ if px is None or go is None:
 {l1_sum.to_html(index=False)}
 <h2>Top 20 优先级主题</h2>
 {top20.to_html(index=False)}
+{jtbd_html}
 </body></html>"""
 
     with open(output_path, "w", encoding="utf-8") as f:
@@ -188,6 +210,59 @@ fig_table = go.Figure(data=[go.Table(
 )])
 fig_table.update_layout(title="Top 20 优先级主题明细", height=500, margin=dict(l=10, r=10, t=40, b=10))
 
+jtbd_charts = ""
+if df_jtbd is not None and not df_jtbd.empty:
+    jtbd_agg = df_jtbd.groupby("jtbd_l1").agg(
+        issue_count=("issue_count", "sum"),
+        scenario_count=("scenario_l2", "count"),
+        avg_priority=("priority_score", "mean"),
+    ).reset_index().sort_values("issue_count", ascending=True)
+
+    fig_jtbd_bar = px.bar(
+        jtbd_agg,
+        x="issue_count",
+        y="jtbd_l1",
+        orientation="h",
+        text="issue_count",
+        title="各 JTBD 反馈量分布",
+        labels={"issue_count": "反馈量", "jtbd_l1": "JTBD"},
+        color="issue_count",
+        color_continuous_scale="Tealgrn",
+    )
+    fig_jtbd_bar.update_traces(textposition="outside")
+    fig_jtbd_bar.update_layout(height=400, margin=dict(l=10, r=10, t=40, b=10))
+
+    jtbd_pie_df = df_jtbd.groupby("jtbd_l1")["issue_count"].sum().reset_index()
+    fig_jtbd_pie = px.pie(
+        jtbd_pie_df,
+        values="issue_count",
+        names="jtbd_l1",
+        title="JTBD 反馈量占比",
+        hole=0.4,
+    )
+    fig_jtbd_pie.update_traces(textposition="inside", textinfo="percent+label")
+    fig_jtbd_pie.update_layout(height=450, margin=dict(l=10, r=10, t=40, b=10))
+
+    top_scenario = df_jtbd.nlargest(15, "priority_score")
+    fig_scenario = px.bar(
+        top_scenario,
+        x="priority_score",
+        y="scenario_l2",
+        orientation="h",
+        text="priority_score",
+        title="Top 15 高优先级场景",
+        labels={"priority_score": "优先级得分", "scenario_l2": "场景"},
+        color="priority_score",
+        color_continuous_scale="Greens",
+    )
+    fig_scenario.update_traces(textposition="outside")
+    fig_scenario.update_layout(height=500, margin=dict(l=10, r=10, t=40, b=10))
+
+    jtbd_charts = f"""
+<div class="chart-card">{fig_jtbd_bar.to_html(full_html=False, include_plotlyjs=False)}</div>
+<div class="chart-card">{fig_jtbd_pie.to_html(full_html=False, include_plotlyjs=False)}</div>
+<div class="chart-card full">{fig_scenario.to_html(full_html=False, include_plotlyjs=False)}</div>"""
+
 html_parts = [f"""
 <html lang="zh-CN">
 <head>
@@ -214,7 +289,7 @@ body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans
 <body>
 <div class="header">
 <h1>VOC Dashboard</h1>
-<p>基于 {theme_csv_path.name} 的反馈主题分析</p>
+<p>基于 {theme_csv_path.name}{' & ' + jtbd_csv_path.name if df_jtbd is not None else ''} 的反馈主题分析</p>
 </div>
 <div class="stats">
 <div class="stat-card"><div class="num">{total_themes}</div><div class="label">主题数</div></div>
@@ -230,6 +305,7 @@ body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans
 <div class="chart-card full">{fig_scatter.to_html(full_html=False, include_plotlyjs=False)}</div>
 <div class="chart-card full">{fig_channels.to_html(full_html=False, include_plotlyjs=False)}</div>
 <div class="chart-card full">{fig_table.to_html(full_html=False, include_plotlyjs=False)}</div>
+{jtbd_charts}
 </div>
 <div class="footer">Generated by VOC Dashboard | {pd.Timestamp.now().strftime('%Y-%m-%d %H:%M')}</div>
 </body>

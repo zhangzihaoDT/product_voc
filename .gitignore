@@ -12,6 +12,7 @@ __pycache__/
 *.csv
 !need_theme_dict.csv
 !theme_fact_full_v*.csv
+!jtbd_fact_full_v*.csv
 !need_theme_other_issues_full_v*.csv
 
 # 生成的 Dashboard
