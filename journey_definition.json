@@ -11,8 +11,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "交付体验",
-                  "name": "提车服务效率",
-                  "keywords": "提车,交付,排队"
+                  "need_theme_l2": "提车服务效率"
                 }
               ]
             },
@@ -21,8 +20,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "交付体验",
-                  "name": "交付流程体验",
-                  "keywords": "交付流程,流程不到位,等待时间长,打3分,不满意,库存车,手续办理,交车前"
+                  "need_theme_l2": "交付流程体验"
                 }
               ]
             },
@@ -31,8 +29,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "交付体验",
-                  "name": "配件交付延迟",
-                  "keywords": "配件,到货,延迟,砸金蛋,行李箱,脚踏板安装,安装慢"
+                  "need_theme_l2": "配件交付延迟"
                 }
               ]
             },
@@ -41,8 +38,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "交付体验",
-                  "name": "销售承诺兑现",
-                  "keywords": "销售,承诺,兑现"
+                  "need_theme_l2": "销售承诺兑现"
                 }
               ]
             },
@@ -51,8 +47,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "交付体验",
-                  "name": "交付礼品权益",
-                  "keywords": "礼品,赠送,遮阳帘,地垫"
+                  "need_theme_l2": "交付礼品权益"
                 }
               ]
             },
@@ -61,8 +56,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "交付体验",
-                  "name": "增值服务告知",
-                  "keywords": "增值服务,服务告知,10000,8000"
+                  "need_theme_l2": "增值服务告知"
                 }
               ]
             }
@@ -81,8 +75,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "APP体验",
-                  "name": "APP流畅性优化",
-                  "keywords": "APP,卡顿,闪退,流畅"
+                  "need_theme_l2": "APP流畅性优化"
                 }
               ]
             },
@@ -91,8 +84,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "账号与权益",
-                  "name": "账号换绑与登录",
-                  "keywords": "换绑,登录,账号,手机号"
+                  "need_theme_l2": "账号换绑与登录"
                 }
               ]
             },
@@ -101,8 +93,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "账号与权益",
-                  "name": "签到规则优化",
-                  "keywords": "签到,积分,规则"
+                  "need_theme_l2": "签到规则优化"
                 }
               ]
             }
@@ -121,8 +112,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "车联车控",
-                  "name": "后备箱远程控制",
-                  "keywords": "后备箱,远程控制,后备箱开关,后备箱控制,远程定位,远程挪车,尾门"
+                  "need_theme_l2": "后备箱远程控制"
                 }
               ]
             },
@@ -131,8 +121,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "外观设计",
-                  "name": "外观配色选项",
-                  "keywords": "顶棚,颜色,配色,黑色顶棚"
+                  "need_theme_l2": "外观配色选项"
                 }
               ]
             },
@@ -141,8 +130,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "场景模式配置与触发",
-                  "keywords": "场景模式,一键场景,上电周期,触发,多次触发,自动触发,场景自定义,宠物模式,离车不下电,一键备车,高温保护"
+                  "need_theme_l2": "场景模式配置与触发"
                 }
               ]
             }
@@ -156,18 +144,15 @@
               "need_themes": [
                 {
                   "need_theme_l1": "车联车控",
-                  "name": "蓝牙钥匙稳定性",
-                  "keywords": "蓝牙钥匙,近车解锁,离车落锁,解锁,落锁,手表车钥匙,华为手表,NFC钥匙,NFC"
+                  "need_theme_l2": "蓝牙钥匙稳定性"
                 },
                 {
                   "need_theme_l1": "车联车控",
-                  "name": "车门状态提醒",
-                  "keywords": "车门,没关好,锁车,提示,语音提示"
+                  "need_theme_l2": "车门状态提醒"
                 },
                 {
                   "need_theme_l1": "车联车控",
-                  "name": "门把手误触优化",
-                  "keywords": "门把手,误触"
+                  "need_theme_l2": "门把手误触优化"
                 }
               ]
             },
@@ -176,8 +161,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "车辆品质",
-                  "name": "车窗升降异常",
-                  "keywords": "车窗,升起,一段一段,升降异常,车窗-升降异常"
+                  "need_theme_l2": "车窗升降异常"
                 }
               ]
             }
@@ -191,8 +175,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "导航信息准确性",
-                  "keywords": "导航,地图,高德,ETC,收费,路线"
+                  "need_theme_l2": "导航信息准确性"
                 }
               ]
             },
@@ -201,8 +184,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "语音识别精准性",
-                  "keywords": "语音,识别,唤醒,听不懂"
+                  "need_theme_l2": "语音识别精准性"
                 }
               ]
             },
@@ -211,8 +193,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "HUD显示范围",
-                  "keywords": "HUD,抬头显示,看不全,显示半个"
+                  "need_theme_l2": "HUD显示范围"
                 }
               ]
             },
@@ -221,13 +202,11 @@
               "need_themes": [
                 {
                   "need_theme_l1": "车辆品质",
-                  "name": "胎压告警位置问题",
-                  "keywords": "胎压,告警"
+                  "need_theme_l2": "胎压告警位置问题"
                 },
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "仪表信息显示增强",
-                  "keywords": "能耗,欢乐表,信息显示,空气质量,pm2.5,续航显示,油耗,显示不准"
+                  "need_theme_l2": "仪表信息显示增强"
                 }
               ]
             },
@@ -236,48 +215,39 @@
               "need_themes": [
                 {
                   "need_theme_l1": "车辆品质",
-                  "name": "车门异响问题",
-                  "keywords": "车门,异响"
+                  "need_theme_l2": "车门异响问题"
                 },
                 {
                   "need_theme_l1": "车辆品质",
-                  "name": "方向盘设计优化",
-                  "keywords": "方向盘"
+                  "need_theme_l2": "方向盘设计优化"
                 },
                 {
                   "need_theme_l1": "车辆品质",
-                  "name": "车灯故障",
-                  "keywords": "尾灯,大灯,灯不亮,尾灯不亮"
+                  "need_theme_l2": "车灯故障"
                 },
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "智能化体验提升",
-                  "keywords": "智能化体验太差,友商,落后,多学学,体验太差,UI界面,渲染,输入法,应用商城,返回上一层"
+                  "need_theme_l2": "智能化体验提升"
                 },
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "行车记录仪能力",
-                  "keywords": "行车记录仪,行车记录,录制,录像,清晰度,车牌,叠加,方向,制动,电门,裁剪,内存卡,Carlog,每日里程"
+                  "need_theme_l2": "行车记录仪能力"
                 },
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "HiCar体验与管理",
-                  "keywords": "hicar,HiCar,卸载,删除,不好用,投屏,无线网络,WiFi,连接,热点"
+                  "need_theme_l2": "HiCar体验与管理"
                 },
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "车机系统稳定性与交互",
-                  "keywords": "车机,系统,卡顿,死机,重启,黑屏,屏幕无反应,触控不灵敏"
+                  "need_theme_l2": "车机系统稳定性与交互"
                 },
                 {
                   "need_theme_l1": "车辆品质",
-                  "name": "雨刮策略与灵敏度",
-                  "keywords": "雨刮,自动雨刮,雨量感应,灵敏度,中小雨,不启动,乱刮,喷水,雨刷"
+                  "need_theme_l2": "雨刮策略与灵敏度"
                 },
                 {
                   "need_theme_l1": "车辆品质",
-                  "name": "座椅与内饰体验",
-                  "keywords": "座椅,扶手,零重力,通风,加热,按摩,二排,三排"
+                  "need_theme_l2": "座椅与内饰体验"
                 }
               ]
             },
@@ -286,8 +256,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "空调控制优化",
-                  "keywords": "空调,出风口,后排空调,高温保护,除雾,电磁阀,制冷,制热,风量,除雾"
+                  "need_theme_l2": "空调控制优化"
                 }
               ]
             },
@@ -296,8 +265,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "车辆品质",
-                  "name": "空气悬架与底盘体验",
-                  "keywords": "空悬,悬架,底盘,空气弹簧,空气悬架,避震,弹簧"
+                  "need_theme_l2": "空气悬架与底盘体验"
                 }
               ]
             },
@@ -306,8 +274,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "车联车控",
-                  "name": "后视镜功能优化",
-                  "keywords": "后视镜下翻,防眩目,倒车下翻,后视镜,折叠,自动调整"
+                  "need_theme_l2": "后视镜功能优化"
                 }
               ]
             }
@@ -321,28 +288,23 @@
               "need_themes": [
                 {
                   "need_theme_l1": "智驾体验",
-                  "name": "智驾接管安全",
-                  "keywords": "智驾,接管,拨杆,红绿灯,刹车,安全"
+                  "need_theme_l2": "智驾接管安全"
                 },
                 {
                   "need_theme_l1": "智驾体验",
-                  "name": "智驾决策优化",
-                  "keywords": "变道,加塞,决策,跟车,防眩晕模式,接打电话"
+                  "need_theme_l2": "智驾决策优化"
                 },
                 {
                   "need_theme_l1": "智驾体验",
-                  "name": "CarPlay与NOA冲突",
-                  "keywords": "carplay,NOA,冲突"
+                  "need_theme_l2": "CarPlay与NOA冲突"
                 },
                 {
                   "need_theme_l1": "智驾体验",
-                  "name": "智驾安全策略",
-                  "keywords": "雨天,动态降速,安全策略,偏右行驶,偏右,右边很近"
+                  "need_theme_l2": "智驾安全策略"
                 },
                 {
                   "need_theme_l1": "智驾体验",
-                  "name": "车道居中与偏置策略",
-                  "keywords": "偏左,偏右,居中,车道居中,贴线,靠左,靠右,车道保持偏,掉头转弯"
+                  "need_theme_l2": "车道居中与偏置策略"
                 }
               ]
             },
@@ -351,8 +313,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "智驾体验",
-                  "name": "智驾合规与交通规则",
-                  "keywords": "左转掉头,红灯,禁止掉头,强行掉头,非法"
+                  "need_theme_l2": "智驾合规与交通规则"
                 }
               ]
             }
@@ -366,8 +327,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "智驾体验",
-                  "name": "自动泊车体验",
-                  "keywords": "泊车,自动泊车,APA,遥控泊车,直进直出,泊出,侧方位"
+                  "need_theme_l2": "自动泊车体验"
                 }
               ]
             },
@@ -376,8 +336,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "360影像视觉体验",
-                  "keywords": "360,环车,全景影像,环视,影像,背景"
+                  "need_theme_l2": "360影像视觉体验"
                 }
               ]
             }
@@ -391,8 +350,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "主题屏保一致性",
-                  "keywords": "主题,屏保,一致性,熄屏,黑色时间屏保"
+                  "need_theme_l2": "主题屏保一致性"
                 }
               ]
             },
@@ -401,13 +359,11 @@
               "need_themes": [
                 {
                   "need_theme_l1": "灯光体验",
-                  "name": "智慧灯语自定义",
-                  "keywords": "灯语,智慧灯语,灯光,小蓝灯"
+                  "need_theme_l2": "智慧灯语自定义"
                 },
                 {
                   "need_theme_l1": "灯光体验",
-                  "name": "灯光秀异常",
-                  "keywords": "灯光秀,灯光异常"
+                  "need_theme_l2": "灯光秀异常"
                 }
               ]
             },
@@ -416,8 +372,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "哨兵模式可靠性",
-                  "keywords": "哨兵,哨兵模式,录制,录像,触发,未触发,报警,抓拍"
+                  "need_theme_l2": "哨兵模式可靠性"
                 }
               ]
             },
@@ -426,8 +381,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "车内照明与氛围灯",
-                  "keywords": "阅读灯,脚窝灯,迎宾灯,氛围灯,车内照明,亮度,车内灯光"
+                  "need_theme_l2": "车内照明与氛围灯"
                 }
               ]
             }
@@ -441,8 +395,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "多屏娱乐协同",
-                  "keywords": "多屏,副驾屏,中控,仪表,联动,后排娱乐屏,同播,媒体画面,主驾,副驾,OTA副驾,分屏,三指,手势,触控,触摸,不灵敏,屏幕升降,后排屏幕,屏保膜,副屏"
+                  "need_theme_l2": "多屏娱乐协同"
                 }
               ]
             },
@@ -451,13 +404,11 @@
               "need_themes": [
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "音响分区控制",
-                  "keywords": "音响,扬声器,音效,分区"
+                  "need_theme_l2": "音响分区控制"
                 },
                 {
                   "need_theme_l1": "内容生态",
-                  "name": "音乐展示优化",
-                  "keywords": "音乐,歌名,名称显示"
+                  "need_theme_l2": "音乐展示优化"
                 }
               ]
             },
@@ -466,8 +417,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "内容生态",
-                  "name": "腾讯视频功能",
-                  "keywords": "腾讯视频,视频"
+                  "need_theme_l2": "腾讯视频功能"
                 }
               ]
             },
@@ -476,8 +426,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "智舱体验",
-                  "name": "无麦K歌与模拟声浪",
-                  "keywords": "K歌,无麦K歌,模拟声浪,麦克风,话筒,唱歌"
+                  "need_theme_l2": "无麦K歌与模拟声浪"
                 }
               ]
             }
@@ -491,8 +440,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "补能",
-                  "name": "充电管理与预约",
-                  "keywords": "充电预约,预热,快充功率,家桩,充电桩,充电管理,峰谷,充电统计,开票"
+                  "need_theme_l2": "充电管理与预约"
                 }
               ]
             }
@@ -511,8 +459,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "服务体验",
-                  "name": "维修进度透明度",
-                  "keywords": "售后,维修,进度,服务群,门店"
+                  "need_theme_l2": "维修进度透明度"
                 }
               ]
             },
@@ -521,13 +468,11 @@
               "need_themes": [
                 {
                   "need_theme_l1": "服务体验",
-                  "name": "服务响应效率",
-                  "keywords": "响应,及时,回电,处理"
+                  "need_theme_l2": "服务响应效率"
                 },
                 {
                   "need_theme_l1": "服务体验",
-                  "name": "电话触达体验",
-                  "keywords": "骚扰,别再电话,频繁电话,电话服务"
+                  "need_theme_l2": "电话触达体验"
                 }
               ]
             },
@@ -536,13 +481,11 @@
               "need_themes": [
                 {
                   "need_theme_l1": "服务体验",
-                  "name": "服务流程精细化",
-                  "keywords": "流程,服务精细化,配置说明,主理态度,服务跟上,背刺老车主,更新迭代快"
+                  "need_theme_l2": "服务流程精细化"
                 },
                 {
                   "need_theme_l1": "服务体验",
-                  "name": "维修质量问题",
-                  "keywords": "维修质量,未解决,返修"
+                  "need_theme_l2": "维修质量问题"
                 }
               ]
             },
@@ -551,23 +494,19 @@
               "need_themes": [
                 {
                   "need_theme_l1": "服务体验",
-                  "name": "门店休息区体验",
-                  "keywords": "等候区,休息区,舒适,休息室环境"
+                  "need_theme_l2": "门店休息区体验"
                 },
                 {
                   "need_theme_l1": "服务体验",
-                  "name": "洗车服务质量",
-                  "keywords": "洗车"
+                  "need_theme_l2": "洗车服务质量"
                 },
                 {
                   "need_theme_l1": "服务体验",
-                  "name": "人员专业性",
-                  "keywords": "专业性,讲解,工作人员"
+                  "need_theme_l2": "人员专业性"
                 },
                 {
                   "need_theme_l1": "服务体验",
-                  "name": "门店覆盖与试驾体验",
-                  "keywords": "门店少,试驾难,建店,试驾预约,门店覆盖,保养不便,毕节"
+                  "need_theme_l2": "门店覆盖与试驾体验"
                 }
               ]
             },
@@ -576,8 +515,7 @@
               "need_themes": [
                 {
                   "need_theme_l1": "服务体验",
-                  "name": "维保取送服务",
-                  "keywords": "取送,维保,保养,上门"
+                  "need_theme_l2": "维保取送服务"
                 }
               ]
             }
