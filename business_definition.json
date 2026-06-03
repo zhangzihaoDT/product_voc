@@ -1,0 +1,47 @@
+{
+  "lifecycles": [
+    {
+      "name": "用车阶段",
+      "jtbds": [
+        {
+          "name": "驾驶",
+          "scenarios": [
+            {
+              "name": "其他",
+              "need_themes": [
+                { "need_theme_l1": "车辆品质", "need_theme_l2": "座椅与内饰体验" },
+                { "need_theme_l1": "车辆品质", "need_theme_l2": "雨刮策略与灵敏度" },
+                { "need_theme_l1": "车辆品质", "need_theme_l2": "方向盘设计优化" },
+                { "need_theme_l1": "车辆品质", "need_theme_l2": "车门异响问题" }
+              ]
+            },
+            {
+              "name": "空调",
+              "need_themes": [
+                { "need_theme_l1": "智舱体验", "need_theme_l2": "空调控制优化" }
+              ]
+            },
+            {
+              "name": "后视镜",
+              "need_themes": [
+                { "need_theme_l1": "车联车控", "need_theme_l2": "后视镜功能优化" }
+              ]
+            },
+            {
+              "name": "悬架",
+              "need_themes": [
+                { "need_theme_l1": "车辆品质", "need_theme_l2": "空气悬架与底盘体验" }
+              ]
+            },
+            {
+              "name": "仪表",
+              "need_themes": [
+                { "need_theme_l1": "车辆品质", "need_theme_l2": "胎压告警位置问题" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

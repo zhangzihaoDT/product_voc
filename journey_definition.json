@@ -71,20 +71,24 @@
           "name": "数字资产管理",
           "scenarios": [
             {
-              "name": "APP",
-              "need_themes": [
-                {
-                  "need_theme_l1": "APP体验",
-                  "need_theme_l2": "APP流畅性优化"
-                }
-              ]
-            },
-            {
               "name": "账号",
               "need_themes": [
                 {
                   "need_theme_l1": "账号与权益",
                   "need_theme_l2": "账号换绑与登录"
+                },
+                {
+                  "need_theme_l1": "账号与权益",
+                  "need_theme_l2": "车主权益与政策"
+                }
+              ]
+            },
+            {
+              "name": "APP",
+              "need_themes": [
+                {
+                  "need_theme_l1": "APP体验",
+                  "need_theme_l2": "APP体验优化"
                 }
               ]
             },
@@ -108,20 +112,24 @@
           "name": "用车准备",
           "scenarios": [
             {
-              "name": "后备箱远控",
-              "need_themes": [
-                {
-                  "need_theme_l1": "车联车控",
-                  "need_theme_l2": "后备箱远程控制"
-                }
-              ]
-            },
-            {
               "name": "配置选配",
               "need_themes": [
                 {
                   "need_theme_l1": "外观设计",
                   "need_theme_l2": "外观配色选项"
+                },
+                {
+                  "need_theme_l1": "外观设计",
+                  "need_theme_l2": "内饰材质与气味"
+                }
+              ]
+            },
+            {
+              "name": "后备箱远控",
+              "need_themes": [
+                {
+                  "need_theme_l1": "车联车控",
+                  "need_theme_l2": "后备箱远程控制"
                 }
               ]
             },
@@ -153,6 +161,10 @@
                 {
                   "need_theme_l1": "车联车控",
                   "need_theme_l2": "门把手误触优化"
+                },
+                {
+                  "need_theme_l1": "车联车控",
+                  "need_theme_l2": "门锁安全逻辑"
                 }
               ]
             },
@@ -170,6 +182,105 @@
         {
           "name": "驾驶",
           "scenarios": [
+            {
+              "name": "其他",
+              "need_themes": [
+                {
+                  "need_theme_l1": "车辆品质",
+                  "need_theme_l2": "车门异响问题"
+                },
+                {
+                  "need_theme_l1": "车辆品质",
+                  "need_theme_l2": "方向盘设计优化"
+                },
+                {
+                  "need_theme_l1": "车辆品质",
+                  "need_theme_l2": "车灯故障"
+                },
+                {
+                  "need_theme_l1": "智舱体验",
+                  "need_theme_l2": "智能化体验提升"
+                },
+                {
+                  "need_theme_l1": "智舱体验",
+                  "need_theme_l2": "安全警示音量"
+                },
+                {
+                  "need_theme_l1": "智舱体验",
+                  "need_theme_l2": "行车记录仪能力"
+                },
+                {
+                  "need_theme_l1": "智舱体验",
+                  "need_theme_l2": "HiCar体验与管理"
+                },
+                {
+                  "need_theme_l1": "智舱体验",
+                  "need_theme_l2": "车机系统稳定性与交互"
+                },
+                {
+                  "need_theme_l1": "智舱体验",
+                  "need_theme_l2": "车机应用与功能扩展"
+                },
+                {
+                  "need_theme_l1": "车辆品质",
+                  "need_theme_l2": "雨刮策略与灵敏度"
+                },
+                {
+                  "need_theme_l1": "车辆品质",
+                  "need_theme_l2": "座椅与内饰体验"
+                },
+                {
+                  "need_theme_l1": "车辆品质",
+                  "need_theme_l2": "制动异响与脚感"
+                },
+                {
+                  "need_theme_l1": "车辆品质",
+                  "need_theme_l2": "储物空间不足"
+                },
+                {
+                  "need_theme_l1": "车辆品质",
+                  "need_theme_l2": "遮阳帘与天窗体验"
+                },
+                {
+                  "need_theme_l1": "三电系统",
+                  "need_theme_l2": "电池系统故障与安全"
+                },
+                {
+                  "need_theme_l1": "三电系统",
+                  "need_theme_l2": "动能回收与驾驶模式"
+                }
+              ]
+            },
+            {
+              "name": "仪表",
+              "need_themes": [
+                {
+                  "need_theme_l1": "车辆品质",
+                  "need_theme_l2": "胎压告警位置问题"
+                },
+                {
+                  "need_theme_l1": "车辆品质",
+                  "need_theme_l2": "轮胎规格与胎压显示"
+                },
+                {
+                  "need_theme_l1": "智舱体验",
+                  "need_theme_l2": "仪表信息显示增强"
+                }
+              ]
+            },
+            {
+              "name": "悬架",
+              "need_themes": [
+                {
+                  "need_theme_l1": "车辆品质",
+                  "need_theme_l2": "底盘护板与线束保护"
+                },
+                {
+                  "need_theme_l1": "车辆品质",
+                  "need_theme_l2": "空气悬架与底盘体验"
+                }
+              ]
+            },
             {
               "name": "导航",
               "need_themes": [
@@ -198,74 +309,11 @@
               ]
             },
             {
-              "name": "仪表",
-              "need_themes": [
-                {
-                  "need_theme_l1": "车辆品质",
-                  "need_theme_l2": "胎压告警位置问题"
-                },
-                {
-                  "need_theme_l1": "智舱体验",
-                  "need_theme_l2": "仪表信息显示增强"
-                }
-              ]
-            },
-            {
-              "name": "其他",
-              "need_themes": [
-                {
-                  "need_theme_l1": "车辆品质",
-                  "need_theme_l2": "车门异响问题"
-                },
-                {
-                  "need_theme_l1": "车辆品质",
-                  "need_theme_l2": "方向盘设计优化"
-                },
-                {
-                  "need_theme_l1": "车辆品质",
-                  "need_theme_l2": "车灯故障"
-                },
-                {
-                  "need_theme_l1": "智舱体验",
-                  "need_theme_l2": "智能化体验提升"
-                },
-                {
-                  "need_theme_l1": "智舱体验",
-                  "need_theme_l2": "行车记录仪能力"
-                },
-                {
-                  "need_theme_l1": "智舱体验",
-                  "need_theme_l2": "HiCar体验与管理"
-                },
-                {
-                  "need_theme_l1": "智舱体验",
-                  "need_theme_l2": "车机系统稳定性与交互"
-                },
-                {
-                  "need_theme_l1": "车辆品质",
-                  "need_theme_l2": "雨刮策略与灵敏度"
-                },
-                {
-                  "need_theme_l1": "车辆品质",
-                  "need_theme_l2": "座椅与内饰体验"
-                }
-              ]
-            },
-            {
               "name": "空调",
               "need_themes": [
                 {
                   "need_theme_l1": "智舱体验",
                   "need_theme_l2": "空调控制优化"
-                }
-              ]
-            },
-            {
-              "name": "悬架",
-              "need_themes": [
-                {
-                  "need_theme_l1": "车辆品质",
-                  "need_theme_l2": "空气悬架与底盘体验"
                 }
               ]
             },
@@ -346,15 +394,6 @@
           "name": "驻车体验",
           "scenarios": [
             {
-              "name": "驻车娱乐",
-              "need_themes": [
-                {
-                  "need_theme_l1": "智舱体验",
-                  "need_theme_l2": "主题屏保一致性"
-                }
-              ]
-            },
-            {
               "name": "灯语",
               "need_themes": [
                 {
@@ -364,6 +403,15 @@
                 {
                   "need_theme_l1": "灯光体验",
                   "need_theme_l2": "灯光秀异常"
+                }
+              ]
+            },
+            {
+              "name": "驻车娱乐",
+              "need_themes": [
+                {
+                  "need_theme_l1": "智舱体验",
+                  "need_theme_l2": "主题屏保一致性"
                 }
               ]
             },
@@ -391,15 +439,6 @@
           "name": "娱乐",
           "scenarios": [
             {
-              "name": "多屏协同",
-              "need_themes": [
-                {
-                  "need_theme_l1": "智舱体验",
-                  "need_theme_l2": "多屏娱乐协同"
-                }
-              ]
-            },
-            {
               "name": "音乐",
               "need_themes": [
                 {
@@ -407,8 +446,21 @@
                   "need_theme_l2": "音响分区控制"
                 },
                 {
+                  "need_theme_l1": "智舱体验",
+                  "need_theme_l2": "音响音质优化"
+                },
+                {
                   "need_theme_l1": "内容生态",
                   "need_theme_l2": "音乐展示优化"
+                }
+              ]
+            },
+            {
+              "name": "多屏协同",
+              "need_themes": [
+                {
+                  "need_theme_l1": "智舱体验",
+                  "need_theme_l2": "多屏娱乐协同"
                 }
               ]
             },
@@ -441,6 +493,10 @@
                 {
                   "need_theme_l1": "补能",
                   "need_theme_l2": "充电管理与预约"
+                },
+                {
+                  "need_theme_l1": "补能",
+                  "need_theme_l2": "充电口安全"
                 }
               ]
             }
@@ -455,11 +511,23 @@
           "name": "售后服务",
           "scenarios": [
             {
-              "name": "维修进度",
+              "name": "门店服务",
               "need_themes": [
                 {
                   "need_theme_l1": "服务体验",
-                  "need_theme_l2": "维修进度透明度"
+                  "need_theme_l2": "门店休息区体验"
+                },
+                {
+                  "need_theme_l1": "服务体验",
+                  "need_theme_l2": "洗车服务质量"
+                },
+                {
+                  "need_theme_l1": "服务体验",
+                  "need_theme_l2": "人员专业性"
+                },
+                {
+                  "need_theme_l1": "服务体验",
+                  "need_theme_l2": "门店覆盖与试驾体验"
                 }
               ]
             },
@@ -490,23 +558,11 @@
               ]
             },
             {
-              "name": "门店服务",
+              "name": "维修进度",
               "need_themes": [
                 {
                   "need_theme_l1": "服务体验",
-                  "need_theme_l2": "门店休息区体验"
-                },
-                {
-                  "need_theme_l1": "服务体验",
-                  "need_theme_l2": "洗车服务质量"
-                },
-                {
-                  "need_theme_l1": "服务体验",
-                  "need_theme_l2": "人员专业性"
-                },
-                {
-                  "need_theme_l1": "服务体验",
-                  "need_theme_l2": "门店覆盖与试驾体验"
+                  "need_theme_l2": "维修进度透明度"
                 }
               ]
             },
@@ -516,6 +572,25 @@
                 {
                   "need_theme_l1": "服务体验",
                   "need_theme_l2": "维保取送服务"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "其他阶段",
+      "jtbds": [
+        {
+          "name": "其他",
+          "scenarios": [
+            {
+              "name": "其他",
+              "need_themes": [
+                {
+                  "need_theme_l1": "服务体验",
+                  "need_theme_l2": "商城体验"
                 }
               ]
             }

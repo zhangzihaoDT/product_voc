@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智己5月VOC分析 — 三电/底盘/舒适性 Top 20 改进项</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    background: #f5f6f8; color: #1a1a2e; line-height: 1.6;
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+
+/* Header */
+.report-header {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #fff; padding: 40px 32px; border-radius: 12px; margin-bottom: 24px;
+    text-align: center;
+}
+.report-header h1 { font-size: 28px; margin-bottom: 8px; letter-spacing: 2px; }
+.report-header .subtitle { font-size: 14px; opacity: 0.8; }
+.report-header .meta { margin-top: 16px; font-size: 13px; opacity: 0.65; }
+
+/* Summary row */
+.summary-row {
+    display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap;
+}
+.summary-card {
+    flex: 1; min-width: 200px; background: #fff; border-radius: 10px;
+    padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    text-align: center;
+}
+.summary-card .num { font-size: 32px; font-weight: 700; color: #302b63; }
+.summary-card .label { font-size: 13px; color: #888; margin-top: 4px; }
+
+/* Theme cards */
+.theme-card {
+    background: #fff; border-radius: 10px; margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06); overflow: hidden;
+}
+.card-header {
+    display: flex; gap: 16px; padding: 20px 24px;
+    border-bottom: 1px solid #f0f0f0;
+}
+.rank-col {
+    display: flex; align-items: flex-start; padding-top: 2px;
+}
+.rank-num {
+    font-size: 22px; font-weight: 800; color: #302b63;
+    background: #f0eeff; padding: 4px 12px; border-radius: 6px;
+}
+.theme-info { flex: 1; }
+.theme-title-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+.domain-tag {
+    font-size: 11px; padding: 2px 10px; border-radius: 10px;
+    font-weight: 600; letter-spacing: 1px; white-space: nowrap;
+}
+.domain-pt { background: #fff3e0; color: #e65100; }
+.domain-ch { background: #e3f2fd; color: #0d47a1; }
+.domain-cb { background: #e8f5e9; color: #1b5e20; }
+.theme-name { font-size: 18px; font-weight: 700; color: #1a1a2e; }
+.theme-meta {
+    display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: #666;
+    margin-bottom: 6px;
+}
+.meta-item { display: inline-flex; align-items: center; gap: 4px; }
+.stars { font-size: 14px; letter-spacing: 1px; }
+.lv5 { color: #d32f2f; } .lv4 { color: #e65100; } .lv3 { color: #f9a825; } .lv2 { color: #7cb342; }
+.complaint-level { font-weight: 600; }
+.reason { font-size: 13px; color: #999; line-height: 1.5; }
+
+/* Card body */
+.card-body {
+    display: grid; grid-template-columns: 1fr 280px; gap: 0;
+}
+@media (max-width: 768px) {
+    .card-body { grid-template-columns: 1fr; }
+}
+.voc-section {
+    padding: 16px 24px;
+}
+.voc-section h4, .cost-section h4 {
+    font-size: 13px; color: #999; margin-bottom: 12px;
+    text-transform: uppercase; letter-spacing: 1px;
+}
+.voc-item {
+    background: #fafafa; border-radius: 6px; padding: 10px 14px;
+    margin-bottom: 8px; border-left: 3px solid #e0e0e0;
+}
+.voc-model {
+    font-size: 11px; font-weight: 700; color: #302b63;
+    background: #f0eeff; padding: 1px 8px; border-radius: 3px;
+    margin-right: 6px;
+}
+.voc-source { font-size: 11px; color: #bbb; }
+.voc-text { font-size: 13px; color: #444; margin-top: 6px; line-height: 1.6; }
+
+/* Cost section */
+.cost-section {
+    background: #fafbfc; padding: 16px 20px;
+    border-left: 1px solid #f0f0f0;
+}
+.cost-row { display: flex; flex-direction: column; gap: 12px; margin-bottom: 10px; }
+.cost-item { }
+.cost-label { font-size: 12px; color: #888; display: block; margin-bottom: 4px; }
+.cost-value { font-size: 13px; color: #f9a825; letter-spacing: 2px; }
+.cost-note { font-size: 12px; color: #aaa; line-height: 1.5; }
+
+/* Footer */
+.report-footer {
+    text-align: center; padding: 24px; color: #bbb; font-size: 12px;
+}
+.badge-inline {
+    display: inline-block; background: #fff; padding: 2px 8px;
+    border-radius: 4px; font-size: 11px; color: #888; margin: 0 4px;
+}
+
+/* Sort note */
+.sort-note {
+    background: #fffbf0; border: 1px solid #ffe082; border-radius: 8px;
+    padding: 12px 20px; margin-bottom: 20px; font-size: 13px; color: #8d6e00;
+    display: flex; align-items: center; gap: 8px;
+}
+.sort-note .icon { font-size: 18px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+    <div class="report-header">
+        <h1>智己 5月 VOC 分析报告</h1>
+        <div class="subtitle">三电系统 · 底盘和驾驶 · 座椅及舱内舒适性 — 改进优先级 Top 19</div>
+        <div class="meta">
+            数据来源: 5月产品建议 + 5月400建议 | 有效条目: 94条 | 报告生成: 2026-06-02
+        </div>
+    </div>
+
+    <div class="summary-row">
+        <div class="summary-card">
+            <div class="num">94</div>
+            <div class="label">三域相关VOC条目</div>
+        </div>
+        <div class="summary-card">
+            <div class="num">19</div>
+            <div class="label">归纳改进主题</div>
+        </div>
+        <div class="summary-card">
+            <div class="num">3</div>
+            <div class="label">★★★★★ 安全级抱怨</div>
+        </div>
+        <div class="summary-card">
+            <div class="num">5</div>
+            <div class="label">★★★★☆ 高抱怨度</div>
+        </div>
+    </div>
+
+    <div class="sort-note">
+        <span class="icon">📌</span>
+        排序依据：<strong>抱怨度等级（高→低）</strong>，同等级按提及次数排序。
+        解决方案代价为<strong>参考信息</strong>，不作为排序依据。
+    </div>
+
+    
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#1</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-pt">三电系统</span>
+                            <h3 class="theme-name">电池系统故障/安全/防护</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 6 条</span>
+                            <span class="meta-item">🚗 LS9(5条)、LS6(1条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv5">★★★★★</span></span>
+                        </div>
+                        <p class="reason">设计缺陷导致电池高压线束遇水故障，行驶中可能断电抛锚，存在严重安全隐患，全国多起案例</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"细化延保分类，本身有电池终身险情况下，想升级整车终身险还需要再支付一次电池终身险。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"这个电池的输出线接口设计有问题，下雨天会被轮胎溅起的水打坏，导致电池故障报错甚至断电，开回4s店还要换线拆电池检测，全国已有多起车友发生此类情形，这应该属于设计缺陷，请智己厂家重视并拿出整改方案，保护车主行车安全，减少维修检测成本，也树立智己品牌担当"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"已经出现一次故障报警，存在重大隐患。这个电池的输出线接口设计有问题，下雨天会被轮胎溅起的水打坏，导致电池故障报错甚至断电，开回4s店还要换线拆电池检测，全国已有多起车友发生此类情形，这应该属于设计缺陷，请智己厂家重视并拿出整改方案，保护车主行车安全，减少维修检测成本，也树立智己品牌担当"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"会被轮胎溅起的水打坏，导致电池故障报错甚至断电，开回4s店还要换线拆电池检测，全国已有多起车友发生此类情形，这应该属于设计缺陷，请智己厂家重视并拿出整改方案，保护车主行车安全，减少维修检测成本，也树立智己品牌担当。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"这个电池的输出线接口设计有问题，下雨天会被轮胎溅起的水打坏，导致电池故障报错甚至断电，开回4s店还要换线拆电池检测，全国已有多起车友发生此类情形，这应该属于设计缺陷，请智己厂家重视并拿出整改方案，保护车主行车安全，减少维修检测成本，也树立智己品牌担当。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"看看人家长城电池高压线束用的钢制护板，再看看ls9用的破纤维板坏了这么多，尽快召回处理该缺陷"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●●●●●</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●●●●●</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">需重新设计高压线束接口及护板，涉及召回更换，周期长</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#2</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-cb">座椅及舱内舒适性</span>
+                            <h3 class="theme-name">门锁/门把手安全隐患</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 6 条</span>
+                            <span class="meta-item">🚗 LS6(3条)、LS8(2条)、L6(1条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv5">★★★★★</span></span>
+                        </div>
+                        <p class="reason">行车中可误触开门、隐藏式门把手夹手风险、四门同时解锁有被侵入隐患，直接关系乘员人身安全</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"等红灯时，按开门健会启动车门，存在误触隐患。建议主驾设置锁车时，保持四门上锁状态，避免误触造成的安全隐患。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"门锁没有一次只解驾驶座门锁的选项，四门同时解锁有一定的安全隐患（人员在车辆解锁时从其他车门闯入）"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"隐藏式门把手建议增加防夹功能。小孩子说拉车门差点被夹手。
+智驾偏车道右侧，不居中。
+新款不能自定义模式了。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">L6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"1、 希望华为watch二手表可以下载 App 蓝牙解锁车门
+2、能不能尽快上千问大模型？"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">400建议</span>
+                        <p class="voc-text">"用户描述：用户反馈近车落锁的该逻辑中必须要打开主驾驶车门的条件没有考虑到实际用车会遇到的问题，很不方便也不合理
+用户建议：通过软件优化改变触发条件"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">400建议</span>
+                        <p class="voc-text">"用户描述：用户表示通过蓝牙通道远控落锁不识别左后车门是否关闭存在弊端
+用户建议：建议可通过提醒的方式告知用户，以免车辆未及时上锁导致失窃"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●●●○○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●●○○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">软件逻辑优化为主，部分需硬件微调</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#3</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-pt">三电系统</span>
+                            <h3 class="theme-name">充电系统安全/便利性</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 4 条</span>
+                            <span class="meta-item">🚗 LS9(2条)、LS6(2条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv5">★★★★★</span></span>
+                        </div>
+                        <p class="reason">锁车后充电口小门仍可电动开启，存在触电/破坏风险；高压线束涉水损坏问题与电池系统关联</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"锁车时，充电口小门仍然可以电动开启，有安全隐患，建议优化，锁车下电后同时上锁小门"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"Ios端的桌面卡片能不能显示车辆状态，比如行驶中，充电中，充电中显示功率 电量 剩余时间，我认为你们的产品经理可以做到，这个不麻烦的 产品提个需求，ui出几个状态图，前端很快就能写完"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"这个黄色地方是充电线的接口，在经过涉水路段时候，车轮溅起的水会对其造成损坏，主控界面会有故障提醒，已经有车友发生该问题，车子经过涉水路面是一个很经常也很实际的用车情形，因此这个问题也应该属于设计方面的瑕疵或则缺陷，建议厂家重视一下，看看有什么召回整改方案，毕竟也不是大问题。希望智己汽车能够拿出大厂担当，避免车主们的损失和对智己汽车的名声影响，及时解决问题。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"充电时实时显示充电电压，电流，功率。以及可查询充电历史数据曲线。"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●●●●○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●●●○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">需硬件设计变更 + 软件联动锁车逻辑</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#4</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-cb">座椅及舱内舒适性</span>
+                            <h3 class="theme-name">座椅舒适性（按摩/通风/加热/异响/调节）</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 15 条</span>
+                            <span class="meta-item">🚗 LS8(5条)、LS7(5条)、LS9(3条)、LS6(2条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv4">★★★★☆</span></span>
+                        </div>
+                        <p class="reason">零重力座椅误触夹伤儿童风险（安全设计缺陷）、座椅记忆被挂挡中断、缺少童锁，投诉量最高(15条)</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"后排中央扶手太小了，可以做大一些，秒变大四坐。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"ls8座椅记忆，在上车后自动调节位置的过程中如果挂档会强制中断座椅移动，导致座椅记忆移动不到位，建议ota更新一下上车座椅记忆的这一次不会被挂挡行驶打断"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"建议后排加个小桌板，不然空荡荡的前排座椅的后面，放东西没地方放"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"ls9能不能升级一下二排座椅 三排座椅联动 放倒。
+三排座椅放倒的时候 二排座椅自动往前，不然三排放倒还要走到前面调二排也太不方便了，其他车都不会这样"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"智己ls8车机上没有座椅调节的儿童锁，很危险"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS7</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"后排零重力座椅多功能按键加上童锁。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"新一代LS6后备箱里的后排放倒按钮，使用时座椅放倒速度太慢了，一直按着等半天，太不方便了。能不能把速度调快点？还有就是不能一键放倒吗？要一直按着不便捷。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS7</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"智己ls7后排零重力座椅误触前排副驾不系安全带和鸿蒙一样会夹伤孩子的，这个是安全设计缺陷，什么时候能改，你不可能要求车主在停车休息时副驾必须系安全带的，出了事谁负责？"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"座椅通风开到最大，风量太小了"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"智己 LS8 六座版中央岛台后方的两个后置杯架，是非常实用的人性化细节配置。日常出行中，无论是后排乘客放置水杯、饮料、保温杯，还是高速长途、家庭自驾、多人通勤等场景，都能随手收纳饮品，取用便捷、收纳规整，极大提升后排乘坐的舒适感与用车便利性。
+五座版虽优化了座椅布局，但直接取消该杯架配置实属可惜，日常用车储物刚需无法得到满足。在此建议官方能够倾听用户需求，后续为五座版车型开放付费加装服务，让五座车主也能选配加装这组后置杯架，兼顾空间布局与实用功能，进一步提升整车用车体验。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"副驾的座椅应该增加一个后门打开的进出位置。方便后排乘员进出。平时光副驾打开的话一个进出位置。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"ls8没有腰托，坐久了不舒服，建议用按摩的爪子当可调腰托，在中控屏调整"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS7</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"智己LS7的右后门触摸按键很不方便，总是被误摸，特别是副驾驶放着包包物品，后排坐了朋友，朋友不小心误摸了“启动零重力座椅”，然后灾难来了…… 能不能有一个配套的盖子，使用时可以打开不用时盖上。或者在中控台可以锁住这个使用功能??
+"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS7</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"智己LS7的右后门触摸按键很不方便，总是被误摸，特别是副驾驶放着包包物品，后排做了朋友，朋友不小心误摸了“启动零重力座椅”，然后灾难来了……
+能不能有一个配套的盖子，使用时可以打开不用时盖上。或者在中控台可以锁住这个使用功能??"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS7</span>
+                        <span class="voc-source">400建议</span>
+                        <p class="voc-text">"用户反馈车辆零重力座椅是触控屏，经常误触，后排座椅调节，不方便，是否可以增加在中控屏去调节，要求作为产品建议反馈。"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●●●●○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●●●●○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">涉及硬件设计变更（零重力逻辑/童锁）+ 软件优化，部分需供应商配合</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#5</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-ch">底盘和驾驶</span>
+                            <h3 class="theme-name">雨刮系统体验差</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 12 条</span>
+                            <span class="meta-item">🚗 LS6(8条)、LS9(2条)、LS8(2条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv4">★★★★☆</span></span>
+                        </div>
+                        <p class="reason">自动雨刮识别不准，雨大不刮、没雨乱刮，严重影响雨天行车视野和安全，投诉量高(12条)</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"感应雨刷不好用，前挡玻璃已经全是水了还不刮，低档速度又太快，建议把感应改成固定吧，给几个低档刮速"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"1、车内娱乐功能太弱，除了音乐和视频，不提供任何游戏，对比国内其他一线品牌太弱。2、智能化程度较低，语音竟然不能控制雨刮器，切雨刮器速度设置不太合理。最为同样的特斯拉车主，觉得还是有点弱。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"LS8建议增加后玻璃雨刮器，毕竟是SUV后雨刮器挺重要，不然下雨看后面不方便，虽然有后摄像头"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"雨天雨刮的逻辑还是优化的不好，需要再优化逻辑，雨变小应该降速或者间隔时间拉长"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"智能雨刮器刮水频率太快了，容易伤玻璃，刮水效果不好"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"建议雨刮器改成对开的，LS9前挡面积大，雨刮右边有很大范围刮不到，可以改成对开式的雨刮，由两边向中间刮，图中副驾有一大块刮不到"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"能不能雨刮传感器和车子联动，设置停车后下雨自动关窗"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"LS8的雨刮，自动档的时候，识别不准，有时候雨挺大了，看不太清了，刮得还是慢速度，经常要手动调到高速刮才看得清。不知道是不是识别雨水有问题，除了磅礴大雨，自动雨刮很少会高速刮，有点恶心，很不方便，超级不方便，每次都要手动调到大档位才看得清，自动不了一点。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"自动雨刮在灵敏度四档的情况下，中小雨基本不启动，只有大雨才行。希望后期能得到优化。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"雨刮水没有显示"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"今天路上，没下雨，突然雨刮器打了两下，不知道为什么"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"这一次系统更新之后。雨刮器这个自动雨刮刮雨速度是平稳了，但是只要经过有荫的地方，雨刮器就会自动启动。"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●●○○○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●●○○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">软件算法优化为主，如硬件传感器问题则需更换</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#6</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-cb">座椅及舱内舒适性</span>
+                            <h3 class="theme-name">车内安全提示音/雷达警示音量</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 4 条</span>
+                            <span class="meta-item">🚗 LS6(2条)、LS8(1条)、LS9(1条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv4">★★★★☆</span></span>
+                        </div>
+                        <p class="reason">雷达警示音量过小已导致实际碰撞事故，侧后方来车无警示音，影响行车及泊车安全</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"新一代智己LS6主动安全警告的提示音太小，建议声音增加警示音音量调节，用户按需设定音量大小"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"智己LS8侧后方来车只在仪表两侧红显，没警示音，希望改进升级增加警示音提示"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"1、增加副驾未系安全带提示
+2、增加低速行驶车外行人提示音"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"今天倒车 在倒车影像上看着还有距离，因为超声波雷达声音不大，就蹭到后面的桩子上了。
+
+建议: 这个车在倒车时的超声波雷达 能像其他车那样，随着距离越近 滴滴的响声越大，到了很近的距离就一直长响声音提醒驾驶员 。
+毕竟 从影像上看 好像还有不少的距离 。
+"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●○○○○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●○○○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">纯软件参数调整，OTA即可实现</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#7</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-ch">底盘和驾驶</span>
+                            <h3 class="theme-name">制动异响/刹车脚感</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 2 条</span>
+                            <span class="meta-item">🚗 LS9(1条)、LS6(1条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv4">★★★★☆</span></span>
+                        </div>
+                        <p class="reason">刹车异响影响驾驶信心，用户反馈缺乏主动碰撞预警制动导致实际碰撞</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"我是一名7年日产车主，19年楼兰高配版。有一个功能推荐给智己参考下。
+
+安全性刹车！楼兰没有360摄像头，但他前后，车的对角线四角都有监控，每一次我超车，车与车距离很近，快有可能发生碰撞，他会马上给车进行机械刹车。虽然我无法马上超车，但是每次我都可以避开事故。7年我没有发生过一次碰撞。
+
+我以为是我车技很好。直到，我使用了ls9，同样情况，我过车，结果碰撞了。我一直反思是哪里问题。原来是楼兰培养了我习惯，他会帮我刹车，避免了事故，但智己还不行。
+
+我想提出这个建议，是希望产品经理能把车的事故发生和安全性考虑更周到。不需要每一个智己系列都有，但起码旗舰车型，本身集商务家庭出行主打，安全性稳妥是首位。更安全是车主心里最基础重要需求。
+
+日产虽已过气，但过往他们对安全的执着和坚持，也值得我们参考。往往细致的产品力，就是时间产生长久信任，抓住用户最核心根本。
+
+期待智己团队可以优化，期待更新！"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"每一次停车后踩刹车，然后启动车子。刹车都有异响。不管是平路还是下坡。咨询客服说新车都存在这个问题。想建议一下。目前很多车子刹车的时候，这个都不会听到有异响的情况。请问是本车的的确需要长时间磨合问题，还是可以通过技术手段解决，每一次踩刹车就觉得自己车子一直有异响。"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●●●●○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●●●●○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">需制动系统标定 + 传感器融合算法优化，测试周期长</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#8</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-ch">底盘和驾驶</span>
+                            <h3 class="theme-name">底盘异响/护板/通过性</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 2 条</span>
+                            <span class="meta-item">🚗 LS8(1条)、未知(1条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv4">★★★★☆</span></span>
+                        </div>
+                        <p class="reason">底盘护板质量差断裂导致高压线束外露，存在漏电风险，用户强烈要求召回升级</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"商城出一款底盘装甲或者改进一下高压线束接头保护，在抖音和群里好多出现原厂护板断裂和高压线束进水断裂的事故！"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">未知</span>
+                        <span class="voc-source">400建议</span>
+                        <p class="voc-text">"用户姓名：女士
+用户联系方式：18979951792
+用户进线表示查看网评有很多说车辆底盘护板质量不好，无法保护高压线束，有可能会导致漏电问题，用户提出疑问：1,后期是否做护板升级，设计调整，如果做的话老车主是否会享受去门店升级护板，2，自行购买护板，门店是否包安装，3，自行安装护板是否影像质保延保
+坐席告知帮其记录问题反馈，用户认可"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●●●○○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●●●○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">需升级护板材质/设计，涉及模具及供应商</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#9</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-cb">座椅及舱内舒适性</span>
+                            <h3 class="theme-name">空调系统（PM2.5/AQI/远程/后排/恒温/宠物模式）</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 8 条</span>
+                            <span class="meta-item">🚗 LS6(3条)、LS8(2条)、L6(2条)、LS7(1条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv3">★★★☆☆</span></span>
+                        </div>
+                        <p class="reason">后排出风量小、缺少高温保护/宠物模式安全锁等场景功能</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"后排出风有问题，这个风量调最大就一点点"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS7</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"希望可以增加宠物模式，大屏展示实时温度。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"远程空调选项太少，增加内外循环切换和风量大小"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">L6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"建议增加离车不下电选项"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"马上夏天了，希望可以添加一个 高温保护功能，车内温度超过多少度，会自动开启空调来降温。冬天车内温度低于多少度会自动开启空调恒温。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">L6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"最近体验了“露营模式”在车上过夜睡觉，期间多次被自动获得“晶石”的提醒声音吵醒，声音尖锐，突发。未发现能关闭该声音的功能设置"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"车子进入宠物模式后，宠物可以从内部按开门键打开车门，造成一定风险。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"马上夏天了，希望可以增加高温保护功能，夏天车内温度超过多少度会自动开启空调降温。冬天低于多少度也可以自动开始空调来恒温。"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●●○○○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●●○○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">软件功能开发为主，后排风道可能需要硬件优化</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#10</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-pt">三电系统</span>
+                            <h3 class="theme-name">动能回收/驾驶模式体验差</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 5 条</span>
+                            <span class="meta-item">🚗 LS9(2条)、L6(2条)、LS6(1条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv3">★★★☆☆</span></span>
+                        </div>
+                        <p class="reason">动能回收力度弱、缺少智能自适应模式、驾驶模式切换操作不便</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"1.建议能量回收增加智能模式，正常滑行关闭，踩刹车时就启动，踩油门关闭，增加快捷按键可以随时开关屏幕和语音操作都不方便
+
+"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"建议把增程车的动力模式模块从屏幕右下角放到左下角，以便行驶途中电量低的时候手动切换（比如纯电模式切换到智能油电模式），右下角太远不方便操作而且有安全隐患，要不然就只能等电量极低强制用油了！或者增加一个设置选项当电量多少时自动切换智能油电模式（毕竟日常通勤基本纯电，高速长途才会用油）"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">L6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"动能回收档位太弱了，建议增加强档位，给用户自己选择，或者增加单踏板模式"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">L6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"建议增加“自动动能回收模式”或者“智能动能回收模式”。
+具体表现为：自动识别车速、路况、车距、下坡，动态无级调节回收力度，拥堵强回收、高速弱回收、下坡最大化回收，全程自动无需手动切换。
+参考车型：领克10EMP
+"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"智己Ls9动能回收弱的，可以做的无感一些，比现有更低一些"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●●○○○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●●○○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">软件策略优化，OTA可实现</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#11</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-cb">座椅及舱内舒适性</span>
+                            <h3 class="theme-name">遥控挪车/直进直出</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 5 条</span>
+                            <span class="meta-item">🚗 LS8(3条)、L6(1条)、LS6(1条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv3">★★★☆☆</span></span>
+                        </div>
+                        <p class="reason">仅支持直进直出，无法转向/倒车入库，狭窄空间经常无法使用，实用性受限</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">L6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"开通远程挪车"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"目前车辆倒车入库，只有直进直出。很多时候直进直出。不能精准停到车位上。是否可以升级ota后，下车后也可以解决倒车入库，侧方位入库等问题。有些时候人家停车场指挥人员会说没有华为的智能，没有理想的车子倒车入库方便。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"手机控制只有直进直出功能局限性有点高，增加方向控制方便调整车身"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"在使用直进直出功能 ，狭小的地方经常使用不了，车身和两侧障碍物距离还有足够的空间也无法使用，建议增加强制选项，速度可以更慢些也不要完全用不了"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"在APP操作中增加一键脱困，除了左右选项外增加一个向前脱困，区别于手动操作的直进直出，这个操作车机可以根据场景折叠后视镜"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●●●○○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●●●○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">需软件功能开发 + 传感器融合，开发周期较长</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#12</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-cb">座椅及舱内舒适性</span>
+                            <h3 class="theme-name">后视镜功能体验</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 4 条</span>
+                            <span class="meta-item">🚗 LS6(2条)、LS8(1条)、LS9(1条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv3">★★★☆☆</span></span>
+                        </div>
+                        <p class="reason">倒车下翻逻辑不合理（离R挡即归位）、缺少单侧下翻选项、下翻角度不可自定义</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"26款LS6 后视镜倒车下翻功在泊车调整过程中离开P挡立刻归位，建议改为泊车期间保持下翻状态。另外建议增加单独右侧下翻功能的开关，仅右侧后视镜下翻。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"目前ls8倒车后视镜下翻只能两侧一起 希望今后增加可以一侧下翻（右侧）功能 谢谢"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"倒车后视镜可不可以自己调节，现在这个固定的直接只看地底，这么危险还不方便，我身高的角度看，后面都看不到只能视频，和ls7可以自己调完全不一样"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"1.驻车情况下，语音控制关闭外部灯光。
+2.倒车下翻后视镜增加角度设置及记忆（每个人的坐姿及习惯不一样）"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●○○○○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●○○○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">纯软件逻辑优化，OTA即可实现</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#13</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-ch">底盘和驾驶</span>
+                            <h3 class="theme-name">方向盘手感/按键/异响</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 4 条</span>
+                            <span class="meta-item">🚗 LS6(2条)、LS9(1条)、LS8(1条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv3">★★★☆☆</span></span>
+                        </div>
+                        <p class="reason">方向盘异响、缺少电动调节/锁车回正等便利功能，影响驾驶质感</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"增加锁车方向盘回正功能"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS9</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"建议增加方向盘右边按键左右的功能比如一键泊车多功能可在方向盘右键实现"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"智己LS6的车方向盘总有异响，空调和按摩威力严重不足，维修售后，固定周五才能发材料，车坏了开去要等十天左右，非常浪费时间和体验（云南昭通店）"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"Ls8的方向盘建议电动控制，有自动调节功能"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●●●○○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●●○○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">异响需零部件改进，电动调节需硬件升级</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#14</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-pt">三电系统</span>
+                            <h3 class="theme-name">续航/能耗显示不准</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 4 条</span>
+                            <span class="meta-item">🚗 LS6(2条)、L6(1条)、LS7(1条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv3">★★★☆☆</span></span>
+                        </div>
+                        <p class="reason">仪表电量信息位置偏下被方向盘遮挡，CLTC续航虚标，APP缺少实际续航显示</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">L6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"在导航内添加到达目的地的剩余电量  电量不够的话可以提供沿途顺路的充电站"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"时间，电量这些信息放在屏幕最下方，太阳照进车里反光根本看不清，有时在高速上需要头低着仔细看才能看清楚剩余电量，怎么不放在屏幕最上方"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"半幅方向盘的ls6，仪表信息 例如灯光，档位信息，电量，等等应该可以选择显示在顶部，否则总是要低头看。之前提过意见，好家伙，提过了，25款的ls6不给我改这个功能。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS7</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"APP续航里程建议加入“实际续航”，cltc太虚。"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●○○○○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●○○○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">UI布局调整 + APP功能增加，开发量小</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#15</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-ch">底盘和驾驶</span>
+                            <h3 class="theme-name">轮胎/胎压问题</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 4 条</span>
+                            <span class="meta-item">🚗 LS6(2条)、LS8(2条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv3">★★★☆☆</span></span>
+                        </div>
+                        <p class="reason">235胎宽偏低影响安全性/定位、APP缺少胎压显示、缺少可选轮胎品牌</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"显示屏的时间显示太小了，有时候看时间根本找不到几点几分，找的同时影响驾驶安全。建议时间显示可以放大一点或者在主屏右边加个模块界面，需要看时间的人自己选，跟胎压显示，车辆里程显示，天气预报显示那种一样，多一个时间显示页面，我用户自己选择。"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"手机智己app中，无里程表数，无胎压显示，无一键备车功能"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"手机智己app中无里程表数，也无胎压显示"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"建议智己ls6可以选择升级胎宽，目前的全系标配235胎宽，同级别电车里面应该是最差的了，对于2吨多的车，安全性也不够，也不符合智己高端电车的定位。理想的都是265。这个也太寒碜了。建议官方提供改进升级的方案，而且轮胎品牌能够增加米其林和马牌。"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●●○○○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●●○○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">产品配置策略调整 + APP功能增加</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#16</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-ch">底盘和驾驶</span>
+                            <h3 class="theme-name">悬架舒适性差/异响</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 3 条</span>
+                            <span class="meta-item">🚗 L6(2条)、LS8(1条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv3">★★★☆☆</span></span>
+                        </div>
+                        <p class="reason">空悬高度调节不灵活、设置不灵敏，影响装载便利性和姿态</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">L6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"建议智己L6空悬版本，最低行驶姿态高度可以再降低，尤其后悬架可以降低到轻松载物的高度！"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">L6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"建议智己L6空气悬架车型，后轮最低高度可以降低到轻松载物的高度，然后平时开车也可以选择保持到这个高度，让姿态更好看，或者给到用户选择！"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"每次开车车机都有开机音乐 能不能设置掉没有，还有个就是空气悬架在车机主动设置上不太灵敏"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●●●○○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●●○○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">软件标定优化为主</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#17</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-cb">座椅及舱内舒适性</span>
+                            <h3 class="theme-name">内饰材质/做工/颜色/气味</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 2 条</span>
+                            <span class="meta-item">🚗 未知(2条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv2">★★☆☆☆</span></span>
+                        </div>
+                        <p class="reason">缺少黑色顶棚选项等个性化选择</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">未知</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"ls9能不能出一个黑色顶棚的颜色 球球了"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">未知</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"智己ls9hyper 能不能出一个黑色顶棚 "</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●●○○○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●○○○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">增加颜色/材质选项，供应链调整</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#18</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-cb">座椅及舱内舒适性</span>
+                            <h3 class="theme-name">储物空间不足（眼镜盒/中控/门板）</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 2 条</span>
+                            <span class="meta-item">🚗 LS8(2条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv2">★★☆☆☆</span></span>
+                        </div>
+                        <p class="reason">缺少眼镜盒、储物格不足，影响日常使用便利性</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"驾驶座和副驾座的储物空间建议增加。需要放行驶证、驾照、ETC卡，纸巾，随身物品等，考虑不同的储物格"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">LS8</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"1、车上没有专门放眼镜的地方，建议改进时增加。
+2、增加前档伸缩型的遮阳帘，防止屏幕被曝晒。
+3、增加后备箱伸缩型的遮物帘，提高隐私性"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●●○○○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●●●○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">内饰设计变更，需模具修改</p>
+                    </div>
+                </div>
+            </div>
+            <div class="theme-card">
+                <div class="card-header">
+                    <div class="rank-col">
+                        <span class="rank-num">#19</span>
+                    </div>
+                    <div class="theme-info">
+                        <div class="theme-title-row">
+                            <span class="domain-tag domain-cb">座椅及舱内舒适性</span>
+                            <h3 class="theme-name">车窗/天窗/遮阳帘体验</h3>
+                        </div>
+                        <div class="theme-meta">
+                            <span class="meta-item">📊 提及 2 条</span>
+                            <span class="meta-item">🚗 LS6(1条)、L6(1条)</span>
+                            <span class="meta-item complaint-level">抱怨度: <span class="stars lv2">★★☆☆☆</span></span>
+                        </div>
+                        <p class="reason">商城遮阳帘缺货、车机UI转圈圈体验差</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="voc-section">
+                        <h4>用户VOC原话</h4>
+                        
+                    <div class="voc-item">
+                        <span class="voc-model">LS6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"智己商城没有放电枪
+老款遮阳帘也一直缺货"</p>
+                    </div>
+                    <div class="voc-item">
+                        <span class="voc-model">L6</span>
+                        <span class="voc-source">产品建议</span>
+                        <p class="voc-text">"车机：遮阳帘打开，不要转圈圈，要改成进度条！卡住没反应才是转圈圈！"</p>
+                    </div>
+                    </div>
+                    <div class="cost-section">
+                        <h4>解决方案代价参考</h4>
+                        <div class="cost-row">
+                            <div class="cost-item">
+                                <span class="cost-label">投入等级</span>
+                                <span class="cost-value">●○○○○</span>
+                            </div>
+                            <div class="cost-item">
+                                <span class="cost-label">周期等级</span>
+                                <span class="cost-value">●○○○○</span>
+                            </div>
+                        </div>
+                        <p class="cost-note">供应链备货 + UI微调</p>
+                    </div>
+                </div>
+            </div>
+
+    <div class="report-footer">
+        本报告聚焦三电系统、底盘和驾驶、座椅及舱内舒适性体验相关抱怨 | 智能座舱/智能驾驶类已排除
+    </div>
+
+</div>
+</body>
+</html>
